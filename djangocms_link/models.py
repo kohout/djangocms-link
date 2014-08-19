@@ -25,10 +25,10 @@ class Link(CMSPlugin):
             link = u"tel://%s" % self.phone
         elif self.mailto:
             link = u"mailto:%s" % self.mailto
-        elif self.url:
-            link = self.url
         elif self.page_link:
             link = self.page_link.get_absolute_url()
+        elif self.url:
+            link = self.url
         else:
             link = ""
         return link
