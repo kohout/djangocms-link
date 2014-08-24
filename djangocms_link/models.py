@@ -13,6 +13,10 @@ class Link(CMSPlugin):
     mailto = models.EmailField(_("mailto"), blank=True, null=True, help_text=_("An email adress has priority over a text link."))
     phone = models.CharField(_('Phone'), blank=True, null=True, max_length=40,
                              help_text=_('A phone number has priority over a mailto link.'))
+    css = models.CharField(_('CSS Classes'),
+        default=u'',
+        blank=True, max_length=100)
+    
     target = models.CharField(_("target"), blank=True, max_length=100, choices=((
         ("", _("same window")),
         ("_blank", _("new window")),
@@ -37,4 +41,3 @@ class Link(CMSPlugin):
         return self.name
 
     search_fields = ('name',)
-

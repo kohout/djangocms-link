@@ -21,6 +21,7 @@ class LinkPlugin(CMSPluginBase):
             'name': instance.name,
             'link': link,
             'target':instance.target,
+            'css': instance.css,
             'placeholder': placeholder,
             'object': instance
         })
