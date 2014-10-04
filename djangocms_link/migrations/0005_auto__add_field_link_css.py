@@ -14,16 +14,10 @@ class Migration(SchemaMigration):
                       keep_default=False)
 
 
-        # Changing field 'Link.page_link'
-        db.alter_column(u'djangocms_link_link', 'page_link_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cms.Page'], null=True, on_delete=models.SET_NULL))
-
     def backwards(self, orm):
         # Deleting field 'Link.css'
         db.delete_column(u'djangocms_link_link', 'css')
 
-
-        # Changing field 'Link.page_link'
-        db.alter_column(u'djangocms_link_link', 'page_link_id', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['cms.Page'], null=True))
 
     models = {
         'cms.cmsplugin': {
@@ -81,6 +75,7 @@ class Migration(SchemaMigration):
         },
         u'djangocms_link.link': {
             'Meta': {'object_name': 'Link', '_ormbases': ['cms.CMSPlugin']},
+            'additional_params': ('django.db.models.fields.CharField', [], {'max_length': '300', 'null': 'True', 'blank': 'True'}),
             u'cmsplugin_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['cms.CMSPlugin']", 'unique': 'True', 'primary_key': 'True'}),
             'css': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '100', 'blank': 'True'}),
             'mailto': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'null': 'True', 'blank': 'True'}),
