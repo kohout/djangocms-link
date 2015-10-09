@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from cms.models import CMSPlugin, Page
+from cms.models.fields import PageField
 
 
 class Link(CMSPlugin):
@@ -9,7 +10,12 @@ class Link(CMSPlugin):
     """
     name = models.CharField(_("name"), max_length=256)
     url = models.URLField(_("link"), blank=True, null=True)
-    page_link = models.ForeignKey(Page, verbose_name=_("page"), blank=True, null=True, help_text=_("A link to a page has priority over a text link."), on_delete=models.SET_NULL)
+    page_link = PageField(
+        verbose_name=_("page"),
+        help_text=_("A link to a page has priority over a text link."),
+        on_delete=models.SET_NULL,
+        blank=True, null=True)
+    #page_link = models.ForeignKey(Page, verbose_name=_("page"), blank=True, null=True, help_text=_("A link to a page has priority over a text link."), on_delete=models.SET_NULL)
     additional_params = models.CharField(_("additional parameters"), max_length=300, blank=True, null=True)
     mailto = models.EmailField(_("mailto"), blank=True, null=True, help_text=_("An email adress has priority over a text link."))
     phone = models.CharField(_('Phone'), blank=True, null=True, max_length=40,
